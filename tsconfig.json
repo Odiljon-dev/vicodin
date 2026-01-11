@@ -13,6 +13,6 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/controllers/member.controller.ts"],
   "exclude": ["node_modules"]
 }
