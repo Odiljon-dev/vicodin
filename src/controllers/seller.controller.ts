@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { T } from "../libs/types/common";
-import MemberService from "../models/Member.service";
 
-const adminController: T = {};
-adminController.goHome = (req: Request, res: Response) => {
+import MemberService from "../models/Member.service";
+import { T } from "../libs/types/common";
+
+const sellerController: T = {};
+sellerController.goHome = (req: Request, res: Response) => {
   try {
     res.send(" Home Page");
   } catch (err) {
@@ -11,15 +12,15 @@ adminController.goHome = (req: Request, res: Response) => {
   }
 };
 
-adminController.getLogin = (req: Request, res: Response) => {
+sellerController.getLogin = (req: Request, res: Response) => {
   try {
     res.send(" Login Page");
   } catch (err) {
-    console.log("Error, grtLogin:", err);
+    console.log("Error, getLogin:", err);
   }
 };
 
-adminController.getSignup = (req: Request, res: Response) => {
+sellerController.getSignup = (req: Request, res: Response) => {
   try {
     res.send(" Signup Page");
   } catch (err) {
@@ -27,4 +28,4 @@ adminController.getSignup = (req: Request, res: Response) => {
   }
 };
 
-export default adminController;
+export default sellerController;

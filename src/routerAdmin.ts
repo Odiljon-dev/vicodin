@@ -1,11 +1,11 @@
 import express from "express";
 const routerAdmin = express.Router();
-import adminController from "./controllers/admin.controller";
+import sellerController from "./controllers/seller.controller";
 
-routerAdmin.get("/", adminController.goHome);
+routerAdmin.get("/", sellerController.goHome);
 
-routerAdmin.get("/login", adminController.getLogin);
+routerAdmin.get("/login", sellerController.getLogin);
 
-routerAdmin.get("/signup", adminController.getSignup);
+routerAdmin.get("/signup", sellerController.getSignup);
 
 export default routerAdmin;
