@@ -9,9 +9,9 @@ routerAdmin
   .post("/login", sellerController.processLogin);
 routerAdmin
   .get("/signup", sellerController.getSignup)
-  .post("/signup", sellerController.processSignup)
+  .post("/signup", sellerController.processSignup);
 
-  /** Product **/
-  /** User **/
+/** Product **/
+/** User **/
 
 export default routerAdmin;
