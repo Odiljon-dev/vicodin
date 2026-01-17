@@ -20,6 +20,6 @@ app.set("view engine", "ejs");
 
 /** ROUTERS **/
 app.use("/admin", routerAdmin); // SSR: EJS
-app.use("/", router); // REACT
+app.use("/", router); // SPA: REACT
 
 export default app;

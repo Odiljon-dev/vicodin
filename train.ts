@@ -13,6 +13,10 @@ css => SNAKE button_style
 Traditional Api 
 Rest Api
 GraphQL Api
-
-
  */
+
+/*
+Traditional FD    =>  BSSR  (Admin) =>  EJS
+Modern FD         =>  SPA   (User)  =>  REACT LIBARY 
+
+*/
