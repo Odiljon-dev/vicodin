@@ -37,10 +37,10 @@ sellerController.processLogin = async (req: Request, res: Response) => {
   try {
     console.log("processLogin");
     const input: LoginInput = req.body;
-       console.log("body:", req.body);
+    console.log("body:", req.body);
 
-       const memberService = new MemberService();
-       const result= await memberService.proccesLogin(input);
+    const memberService = new MemberService();
+    const result = await memberService.proccesLogin(input);
 
     res.send(result);
   } catch (err) {

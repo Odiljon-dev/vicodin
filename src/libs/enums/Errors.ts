@@ -16,8 +16,8 @@ export enum Message {
   UPDATE_FAILED = "Update is failed!",
 
   USED_NICK_PHONE = "You are inserting already used nick or phone!",
-    NO_MEMBER_NICK = "No member with that member nick!",
-      WRONG_PASSWORD = "Wrong password please try again!",
+  NO_MEMBER_NICK = "No member with that member nick!",
+  WRONG_PASSWORD = "Wrong password please try again!",
 }
 
 class Errors extends Error {
