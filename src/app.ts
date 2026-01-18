@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { MORGAN_FORMAT } from "./libs/types/config";
 import session  from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
+import { T } from "./libs/types/common";
 
 const MongoDbStore = ConnectMongoDB(session);
 const store = new MongoDbStore({
@@ -33,6 +34,13 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+app.use(function (req, res, next) {
+  const sessionInstance = req.session as T;
+  res.locals.member = sessionInstance.member;
+  next();
+});
+
 
 
 /** VIEWS **/

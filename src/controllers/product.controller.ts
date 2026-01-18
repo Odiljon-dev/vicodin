@@ -2,11 +2,12 @@ import { Request, Response } from "express";
 import Errors from "../libs/enums/Errors";
 import { T } from "../libs/types/common";
 import ProductService from "../models/Product.Service";
+import { AdminRequest } from "../libs/types/member";
 
 const productService = new ProductService();
 const productController: T = {}
 
-productController.getAllProducts = async (req: Request, res: Response) => {
+productController.getAllProducts = async (req: AdminRequest, res: Response) => {
   try {
     console.log("getAllProducts");
 

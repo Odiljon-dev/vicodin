@@ -16,9 +16,9 @@ routerAdmin
 
 /** Product **/
 
-routerAdmin.get("/product/all", productController.getAllProducts);
-routerAdmin.post("/product/create", productController.createNewProduct);
-routerAdmin.post("/product/:id", productController.updateChosenProduct);
+routerAdmin.get("/product/all", sellerController.verifySeller, productController.getAllProducts);
+routerAdmin.post("/product/create", sellerController.verifySeller, productController.createNewProduct);
+routerAdmin.post("/product/:id", sellerController.verifySeller, productController.updateChosenProduct);
 /** User **/
 
 export default routerAdmin;
