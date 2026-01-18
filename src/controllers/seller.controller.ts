@@ -3,6 +3,7 @@ import MemberService from "../models/Member.service";
 import { T } from "../libs/types/common";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
+import { Message } from "../libs/enums/Errors";
 
 
 const memberService = new MemberService();
@@ -69,6 +70,17 @@ sellerController.processLogin = async (req: AdminRequest, res: Response) => {
     req.session.save(function () {
       res.send(result);
     });
+  } catch (err) {
+    console.log("Error, processLogin:", err);
+    res.send(err);
+  }
+};
+
+sellerController.checkAuthSession = async (req: AdminRequest, res: Response) => {
+  try {
+    console.log("checkAuthSession");
+    if(req.session?.member) res.send(`Hi, ${req.session.member.memberNick}`);
+    else res.send(`<script> alert("${Message.NOT_AUTHENTICATED}")</script>`);
   } catch (err) {
     console.log("Error, processLogin:", err);
     res.send(err);
