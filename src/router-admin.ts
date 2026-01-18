@@ -10,8 +10,8 @@ routerAdmin
 routerAdmin
   .get("/signup", sellerController.getSignup)
   .post("/signup", sellerController.processSignup);
-
-  routerAdmin.get("/check-me", sellerController.checkAuthSession)
+  routerAdmin.get("/logout", sellerController.logout);
+  routerAdmin.get("/check-me", sellerController.checkAuthSession);
 
 /** Product **/
 /** User **/

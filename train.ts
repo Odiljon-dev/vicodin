@@ -20,3 +20,9 @@ Traditional FD    =>  BSSR  (Admin) =>  EJS
 Modern FD         =>  SPA   (User)  =>  REACT LIBARY 
 
 */
+
+
+/*
+
+request => Join
+*/
