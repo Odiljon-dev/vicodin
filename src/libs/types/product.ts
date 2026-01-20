@@ -29,3 +29,17 @@ export interface ProductInput {
     productImages?: string[];
     productViews?: number;
 }
+
+export interface ProductUpdateInput {
+    _id: ObjectId;
+    productStatus?: ProductStatus;
+    productCategory?: ProductCategory;
+    productName?: string;
+    productPrice?: number;
+    productLeftCount?: number;
+    productSize?: ProductSize;
+    productUnit?: ProductUnit;
+    productDesc?: string;
+    productImages?: string[];
+    productViews?: number;
+}

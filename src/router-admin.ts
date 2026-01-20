@@ -12,16 +12,16 @@ routerAdmin
 routerAdmin
   .get("/signup", sellerController.getSignup)
   .post("/signup", makeUploader("members").single("memberImage"), sellerController.processSignup);
-  routerAdmin.get("/logout", sellerController.logout);
-  routerAdmin.get("/check-me", sellerController.checkAuthSession);
+routerAdmin.get("/logout", sellerController.logout);
+routerAdmin.get("/check-me", sellerController.checkAuthSession);
 
 /** Product **/
 
 routerAdmin.get("/product/all", sellerController.verifySeller, productController.getAllProducts);
 routerAdmin.post("/product/create", sellerController.verifySeller,
   //  uploadProductImage.single("productImage"), 
-   makeUploader("products").array("productImages", 5),
-productController.createNewProduct);
+  makeUploader("products").array("productImages", 5),
+  productController.createNewProduct);
 routerAdmin.post("/product/:id", sellerController.verifySeller, productController.updateChosenProduct);
 /** User **/
 
