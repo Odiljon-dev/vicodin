@@ -30,4 +30,11 @@ routerAdmin.get(
   sellerController.getUsers
 );
 
+routerAdmin.post(
+  "/user/edit",
+  sellerController.verifySeller,
+  sellerController.updateChosenUser
+);
+
+
 export default routerAdmin;
