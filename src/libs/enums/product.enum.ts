@@ -26,4 +26,6 @@ export enum ProductCategory {
   EQUIPMENT = "EQUIPMENT",   // apparat
   PROTECTION = "PROTECTION", // maska, qo‘lqop
   TOOL = "TOOL",             // termometr, stetoskop
+  OTHER = "OTHER",
+  
 }
