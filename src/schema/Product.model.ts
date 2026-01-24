@@ -7,7 +7,7 @@ const productSchema = new Schema(
     productStatus: {
       type: String,
       enum: Object.values(ProductStatus),
-      default: ProductStatus.INACTIVE,
+      default: ProductStatus.PAUSE,
     },
 
     productCategory: {
