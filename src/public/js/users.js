@@ -4,9 +4,7 @@ console.log("Users frontend javascript file");
 $(function () {
   $(".member-status").on("change", function (e) {
     const id = e.target.id;
-    console.log("id:", id);
       memberStatus = $(`#${id}.member-status`).val();
-      console.log("memberStatus:", memberStatus);
     // TODO Axios updateChosenUser
     axios
       .post("/admin/user/edit", {
@@ -14,9 +12,7 @@ $(function () {
         memberStatus: memberStatus,
       })
       .then((response) => {
-        console.log("response:", response);
         const result = response.data;
-        console.log("result:", result);
 
         if (result.data) {
           $(".member-status").blur();
