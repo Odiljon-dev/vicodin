@@ -20,7 +20,7 @@ $(function () {
 
   $("#cancel-btn").on("click", () => {
     $(".dish-container").slideToggle(100);
-    $("#process-btn").css("display", "flex");
+    $("#process-btn").css("display", "block");
   });
 
     $(".new-product-status").on("change", async function (e) {

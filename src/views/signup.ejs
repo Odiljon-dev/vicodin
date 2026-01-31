@@ -1,26 +1,27 @@
 <%- include('includes/header') %>
 
 <link rel="stylesheet" type="text/css" href="/css/signup.css" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <body>
   <div class="signup-container">
     <form
+      class="signup-form"
       onsubmit="return validateSignupForm();"
       action="/admin/signup"
       method="POST"
       enctype="multipart/form-data"
     >
-      <div class="signup-frame" style="width: 650px">
+      <div class="signup-frame">
         <div class="signup-top">
-          <span>Signup</span>
-          <div>Go back <a href="/admin" style="color: #6440fb">Home</a></div>
-          <p>
-            Already signed up?
-            <a href="/admin/login" style="color: #6440fb">Login</a>
-          </p>
+          <h1 class="signup-title">Signup</h1>
+          <div class="signup-links">
+            <span>Go back <a href="/admin" class="link-accent">Home</a></span>
+            <span>Already signed up? <a href="/admin/login" class="link-accent">Login</a></span>
+          </div>
         </div>
 
-        <div class="sign-input-frame" style="justify-content: space-between">
+        <div class="sign-input-frame">
           <div class="sign-up-frame">
             <label>Seller *</label>
             <input
@@ -42,7 +43,7 @@
             />
           </div>
         </div>
-        <div class="sign-input-frame" style="justify-content: space-between">
+        <div class="sign-input-frame">
           <div class="sign-up-frame">
             <label>Password *</label>
             <input
@@ -70,18 +71,13 @@
             <img class="upload-img-frame" src="/img/default.jpeg" />
             <div class="upload-container">
               <span class="media-text">Product image</span>
-              <div
-                class="file-box bs3-primary preview-image"
-                style="margin-top: 25px; display: flex"
-              >
+              <div class="file-box preview-image">
                 <input
                   class="upload-name"
                   value="Choose image"
                   disabled="disabled"
                 />
-                <label for="input-file" class="file-input-label"
-                  >Upload Image</label
-                >
+                <label for="input-file" class="file-input-label">Choose Image</label>
                 <input
                   type="file"
                   id="input-file"
@@ -90,18 +86,17 @@
                 />
               </div>
               <p class="thumbnail-desc">
-                Please upload restaurant image.<br />
-                Attention only:.jpg, .jpeg, or .png. <br />
-                formats allowed!
+                Please upload pharmacy / store image.<br />
+                Allowed formats: .jpg, .jpeg, .png
               </p>
             </div>
           </div>
         </div>
 
-        <input name="memberType" value="RESTAURANT" hidden />
+        <input name="memberType" value="SELLER" hidden />
 
-        <button class="signup-btn btn" name="signup" type="submit">
-          Signup
+        <button class="signup-btn" name="signup" type="submit">
+          Create Account
         </button>
       </div>
     </form>

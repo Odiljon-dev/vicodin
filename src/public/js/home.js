@@ -19,79 +19,56 @@ function fitElementToParent(el, padding) {
 }
 
 (function () {
-  const sphereEl = document.querySelector(".sphere-animation"),
-    spherePathEls = sphereEl.querySelectorAll(".sphere path"),
-    pathLength = spherePathEls.length,
-    animations = [];
+  const medicalEl = document.querySelector(".medical-animation");
+  if (!medicalEl) return;
 
-  fitElementToParent(sphereEl);
+  fitElementToParent(medicalEl);
 
-  const breathAnimation = anime({
-    begin: function () {
-      for (let i = 0; i < pathLength; i++) {
-        animations.push(
-          anime({
-            targets: spherePathEls[i],
-            stroke: {
-              value: ["rgba(255,75,75,1)", "rgba(80,80,80,.35)"],
-              duration: 500,
-            },
-            translateX: [2, -4],
-            translateY: [2, -4],
-            easing: "easeOutQuad",
-            autoplay: false,
-          })
-        );
-      }
-    },
-    update: function (ins) {
-      animations.forEach(function (animation, i) {
-        let percent = (1 - Math.sin(i * 0.35 + 0.0022 * ins.currentTime)) / 2;
-        animation.seek(animation.duration * percent);
-      });
-    },
-    duration: Infinity,
-    autoplay: false,
+  const crossVertical = medicalEl.querySelector(".cross-vertical");
+  const crossHorizontal = medicalEl.querySelector(".cross-horizontal");
+  const heartbeatLine = medicalEl.querySelector(".heartbeat-line");
+  const pills = medicalEl.querySelectorAll(".pill");
+
+  // Tibbiy xoch nafas olish animatsiyasi (pulse effect)
+  const crossPulseAnimation = anime({
+    targets: [crossVertical, crossHorizontal],
+    scale: [1, 1.05, 1],
+    opacity: [0.9, 1, 0.9],
+    duration: 2500,
+    easing: "easeInOutSine",
+    loop: true,
+    direction: "alternate",
   });
 
-  const introAnimation = anime
-    .timeline({
-      autoplay: false,
-    })
-    .add(
-      {
-        targets: spherePathEls,
-        strokeDashoffset: {
-          value: [anime.setDashoffset, 0],
-          duration: 3900,
-          easing: "easeInOutCirc",
-          delay: anime.stagger(190, { direction: "reverse" }),
-        },
-        duration: 2000,
-        delay: anime.stagger(60, { direction: "reverse" }),
-        easing: "linear",
-      },
-      0
-    );
+  // Yurak urishi chizig'ini chizish animatsiyasi
+  const heartbeatPathLength = heartbeatLine.getTotalLength?.() || 600;
+  heartbeatLine.setAttribute("stroke-dasharray", heartbeatPathLength);
 
-  const shadowAnimation = anime(
-    {
-      targets: "#sphereGradient",
-      x1: "25%",
-      x2: "25%",
-      y1: "0%",
-      y2: "75%",
-      duration: 30000,
-      easing: "easeOutQuint",
-      autoplay: false,
-    },
-    0
-  );
+  const heartbeatAnimation = anime({
+    targets: heartbeatLine,
+    strokeDashoffset: [heartbeatPathLength, 0],
+    duration: 2000,
+    easing: "easeInOutQuad",
+    loop: true,
+    direction: "alternate",
+    delay: 500,
+  });
+
+  // Tabletka (pill) suzuvchi animatsiyasi
+  const pillAnimation = anime({
+    targets: pills,
+    translateY: [-8, 8, -8],
+    opacity: [0.5, 1, 0.5],
+    duration: 3000,
+    easing: "easeInOutSine",
+    loop: true,
+    delay: anime.stagger(400),
+  });
 
   function init() {
-    introAnimation.play();
-    breathAnimation.play();
-    shadowAnimation.play();
+    crossPulseAnimation.play();
+    heartbeatAnimation.play();
+    pillAnimation.play();
   }
 
   init();

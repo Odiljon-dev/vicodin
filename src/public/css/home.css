@@ -2,24 +2,31 @@
   position: relative;
   width: auto;
   height: auto;
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(-45deg, #216b57f0, #dd5704, #16615cfc, #486782);
+  background: linear-gradient(
+    -45deg,
+    #0f766e,
+    #0d9488,
+    #134e4a,
+    #115e59,
+    #14b8a6
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .home-container a {
   text-decoration: none;
-  color: #098a65;
-}
-
-.home-container .nav-item a {
-  color: #8da2e3;
-}
-
-.home-container .nav-item a.disabled {
-  color: #765a31;
+  color: inherit;
 }
 
 .home-container .navigation-menu {
@@ -28,6 +35,59 @@
   color: #efefee;
   font-size: 40px;
   font-family: monospace;
+  padding: 20px 0;
+}
+
+/* Button style - navigatsiya tugmalari */
+.home-container .nav {
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.home-container .nav-item {
+  margin: 0;
+}
+
+.home-container .nav-item .nav-link {
+  display: inline-block;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #f0fdfa !important;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.home-container .nav-item .nav-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.home-container .nav-item .nav-link.active {
+  background: rgba(20, 184, 166, 0.5);
+  border-color: #5eead4;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
+}
+
+.home-container .nav-item .nav-link.active:hover {
+  background: rgba(20, 184, 166, 0.65);
+  border-color: #99f6e4;
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.5);
+}
+
+.home-container .nav-item .nav-link.disabled {
+  color: rgba(255, 255, 255, 0.5) !important;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .home-container .animation-frame {
@@ -40,28 +100,37 @@
 
 .home-container .animation-wrapper {
   position: relative;
-  width: 775px;
-  height: 775px;
+  width: 500px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.home-container .sphere-animation {
+.home-container .medical-animation {
   position: relative;
-  width: 580px;
-  height: 580px;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.home-container .sphere path {
-  fill: url(#sphereGradient);
-  stroke-width: 1px;
-  stroke: rgba(80, 80, 80, 0.35);
-  backface-visibility: hidden;
+.home-container .medical-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 20px rgba(13, 148, 136, 0.3));
 }
 
-@media (min-width: 500px) {
-  .sphere path {
-    stroke-width: 0.4px;
-  }
+.home-container .medical-cross rect {
+  transform-origin: center;
+  transition: filter 0.3s ease;
+}
+
+.home-container .heartbeat-line {
+  stroke-dasharray: 600;
+}
+
+.home-container .pill {
+  transform-origin: center;
 }

@@ -1,25 +1,22 @@
 <%- include('includes/header') %>
 
 <link rel="stylesheet" type="text/css" href="/css/products.css" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <body>
   <div class="products-container">
     <div class="navigation-menu">
       <ul class="nav justify-content-center">
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link active" href="/admin/">Home</a>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/">Home</a>
         </li>
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/product/all">Menu</a>
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin/product/all">Menu</a>
         </li>
-        <li class="nav-item" style="cursor: pointer">
+        <li class="nav-item">
           <a class="nav-link" href="/admin/user/all">Users</a>
         </li>
-        <li
-          class="nav-item"
-          style="cursor: pointer"
-          onclick="return confirm('Do you want to logout?');"
-        >
+        <li class="nav-item" onclick="return confirm('Do you want to logout?');">
           <a class="nav-link" href="/admin/logout">Logout</a>
         </li>
       </ul>
@@ -28,13 +25,13 @@
     <div class="restaurant-menu-frame">
       <div class="board">
         <div class="dishes-table">
-          <span class="new-dish-txt" style="margin-bottom: 30px">
-            SELLER MENU
-          </span>
-          <table class="table table-bordered table-hover">
-            <thead class="thead-light">
-              <tr class="thead-light">
+          <h1 class="page-title">SELLER MENU</h1>
+          <div class="table-wrapper">
+          <table class="products-table">
+            <thead>
+              <tr>
                 <th scope="col">T/r</th>
+                <th scope="col">Image</th>
                 <th scope="col">Product Name</th>
                 <th scope="col">Product Type</th>
                 <th scope="col">Product Unit</th>
@@ -43,35 +40,41 @@
                 <th scope="col">Status</th>
               </tr>
             </thead>
-            <!--  LOOP PRODUCTS: START  -->
-              <% products.map(function(value, key) { %>
-                 <tbody style="background: white">
-              <td><%= key + 1%></td>
-             <td><%= value.productName %></td>
-              <td><%= value.productCategory %></td>
-              <td
-                ><%= value.productCategory === 'CONSUMABLE' ? value.productUnit :
-                value.productSize %></td
-              >
-              <td><%= value.productPrice %></td>
-              <td><%= value.productLeftCount %></td>
-              <td>
-                  <select class="spec-select new-product-status" id="<%= value._id%>">
-                  <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %> >PAUSE</option>
-                  <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %> >PROCESS</option>
-                  <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %> >DELETE</option>
-                </select>
-              </td>
+            <tbody>
+            <% products.map(function(value, key) {
+              let imgPath = '/img/default.jpeg';
+              if (value.productImages && value.productImages[0]) {
+                const p = value.productImages[0];
+                if (p.startsWith('/uploads')) imgPath = p;
+                else if (p.includes('uploads')) imgPath = '/' + p.substring(p.indexOf('uploads'));
+                else imgPath = p.startsWith('/') ? p : '/' + p.replace(/^\.\//, '');
+              }
+            %>
+              <tr>
+                <td class="col-num"><%= key + 1 %></td>
+                <td class="col-image">
+                  <img src="<%= imgPath %>" alt="<%= value.productName %>" class="product-thumb" />
+                </td>
+                <td><%= value.productName %></td>
+                <td><%= value.productCategory %></td>
+                <td><%= value.productCategory === 'CONSUMABLE' ? value.productUnit : value.productSize %></td>
+                <td><%= value.productPrice %></td>
+                <td><%= value.productLeftCount %></td>
+                <td>
+                  <select class="spec-select new-product-status" id="<%= value._id %>">
+                    <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+                    <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                    <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                  </select>
+                </td>
+              </tr>
+            <% }) %>
             </tbody>
-              <% })%>
-            <!--  LOOP PRODUCTS: END  -->
           </table>
-          <div
-            class="long-input"
-            style="align-items: flex-end; margin-bottom: 25px"
-          >
-            <button class="btn btn-primary" id="process-btn">
-              New Product
+          </div>
+          <div class="table-actions">
+            <button class="btn-new-product" id="process-btn" type="button">
+              + New Product
             </button>
           </div>
         </div>
@@ -82,8 +85,8 @@
           class="dish-container"
           enctype="multipart/form-data"
         >
-          <div class="long-input" style="display: flex; align-items: center">
-            <span class="new-dish-txt">NEW PRODUCT DETAIL</span>
+          <div class="form-section-header">
+            <span class="form-section-title">NEW PRODUCT DETAIL</span>
           </div>
           <div class="login-input-frame">
             <div class="long-input">
@@ -209,10 +212,8 @@
           </div>
 
           <div class="operation-buttons">
-            <button class="btn btn-danger" id="cancel-btn">Cancel</button>
-            <button type="submit" class="btn btn-primary" id="create-btn">
-              Create
-            </button>
+            <button class="btn-cancel" id="cancel-btn" type="button">Cancel</button>
+            <button type="submit" class="btn-create" id="create-btn">Create</button>
           </div>
         </form>
       </div>

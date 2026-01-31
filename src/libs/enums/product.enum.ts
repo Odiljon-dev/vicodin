@@ -4,7 +4,7 @@ export enum ProductSize {
   M = "M",
   L = "L",
   XL = "XL",
-  NORMAL = "NORMAL,",
+  NORMAL = "NORMAL",
 }
 
 export enum ProductUnit {

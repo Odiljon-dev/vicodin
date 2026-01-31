@@ -1,29 +1,34 @@
+import cors from "cors";
 import express from "express";
 import path from "path";
 import router from "./router";
 import routerAdmin from "./router-admin";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 import { MORGAN_FORMAT } from "./libs/types/config";
-import session  from "express-session";
+import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 import { T } from "./libs/types/common";
 
+//TCP
 const MongoDbStore = ConnectMongoDB(session);
 const store = new MongoDbStore({
   uri: String(process.env.MONGO_URL),
   collection: "sessions",
 });
 
-
-/** 1-ENTRAMCE **/
+// 1-ENTRANCE
 const app = express();
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static("./uploads"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors({ credentials: true, origin: true }));
+app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
 
-/** SESSIONS**/
+// 2-SESSIONS
 app.use(
   session({
     secret: String(process.env.SESSION_SECRET),
@@ -42,14 +47,12 @@ app.use(function (req, res, next) {
   next();
 });
 
-
-
-/** VIEWS **/
+// 3-VIEWS
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-/** ROUTERS **/
-app.use("/admin", routerAdmin); // SSR: EJS
-app.use("/", router); // SPA: REACT
+// 4-ROUTERS
+app.use("/admin", routerAdmin); //SSR: EJS
+app.use("/", router); //SPA :React REST API maqsadida ishlatamiz
 
 export default app;

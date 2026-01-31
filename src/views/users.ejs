@@ -1,45 +1,46 @@
 <%- include('includes/header') %>
 
 <link rel="stylesheet" type="text/css" href="/css/users.css" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <body>
   <div class="users-container">
     <% if(!member) { %>
     <div class="navigation-menu">
       <ul class="nav justify-content-center">
-        <li class="nav-item" style="cursor: pointer">
+        <li class="nav-item">
           <a class="nav-link active" href="/admin/">Home</a>
         </li>
-        <li class="nav-item" style="cursor: pointer">
+        <li class="nav-item">
           <a class="nav-link" href="/admin/signup">SignUp</a>
         </li>
-        <li class="nav-item" style="cursor: pointer">
+        <li class="nav-item">
           <a class="nav-link" href="/admin/login">Login</a>
         </li>
       </ul>
     </div>
 
-    <div class="users-frame" style="color: #dddddd">
-      <div class="board" style="font-size: 40px">Please login first!</div>
+    <div class="users-frame">
+      <div class="board">
+        <div class="login-prompt">
+          <span class="login-prompt-text">Please login first!</span>
+        </div>
+      </div>
     </div>
 
     <% } else { %>
     <div class="navigation-menu">
       <ul class="nav justify-content-center">
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link active" href="/admin/">Home</a>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/">Home</a>
         </li>
-        <li class="nav-item" style="cursor: pointer">
+        <li class="nav-item">
           <a class="nav-link" href="/admin/product/all">Menu</a>
         </li>
-        <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/user/all">Users</a>
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin/user/all">Users</a>
         </li>
-        <li
-          class="nav-item"
-          style="cursor: pointer"
-          onclick="return confirm('Do you really want to logout?')"
-        >
+        <li class="nav-item" onclick="return confirm('Do you really want to logout?')">
           <a class="nav-link" href="/admin/logout">Logout</a>
         </li>
       </ul>
@@ -48,34 +49,35 @@
     <div class="users-frame">
       <div class="board">
         <div class="user-table">
-          <span class="header-name" style="margin-bottom: 30px"
-            >All Users List</span
-          >
-          <table class="table table-hover table-sm">
-            <thead class="thead-light">
-              <tr class="thead-light">
-                <th scope="col">No</th>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-             <% users.map(function(value, index) { %>
-               <tbody style="background: white">
-              <td><%= index + 1%></td>
-              <td><%= value.memberNick %></td>
-              <td><%= value.memberPhone%></td>
-              <td style="width: 13%">
-                <select class="spec-select member-status" id="<%= value._id%>">
-                  <option value="ACTIVE" <%= value.memberStatus ==='ACTIVE' ? 'selected': '' %>>ACTIVE</option>
-                  <option value="BLOCK" <%= value.memberStatus ==='BLOCK' ? 'selected': '' %>>BLOCK</option>
-                  <option value="DELETE" <%= value.memberStatus ==='DELETE' ? 'selected': '' %>>DELETE</option>
-                </select>
-              </td>
-            </tbody>
-             <%}) %>
-            <!--  LOOP PRODUCTS: END  -->
-          </table>
+          <h1 class="page-title">All Users List</h1>
+          <div class="table-wrapper">
+            <table class="users-table">
+              <thead>
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% (users || []).map(function(value, index) { %>
+                <tr>
+                  <td class="col-num"><%= index + 1 %></td>
+                  <td><%= value.memberNick %></td>
+                  <td><%= value.memberPhone %></td>
+                  <td>
+                    <select class="spec-select member-status" id="<%= value._id %>">
+                      <option value="ACTIVE" <%= value.memberStatus === 'ACTIVE' ? 'selected' : '' %>>ACTIVE</option>
+                      <option value="BLOCK" <%= value.memberStatus === 'BLOCK' ? 'selected' : '' %>>BLOCK</option>
+                      <option value="DELETE" <%= value.memberStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                    </select>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
